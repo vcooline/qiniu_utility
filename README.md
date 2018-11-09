@@ -1,15 +1,13 @@
 # QiniuUtility
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/qiniu_utility`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+七牛常用组件
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'qiniu_utility'
+gem 'qiniu_utility', git: "git@github.com:vcooline/qiniu_utility.git"
 ```
 
 And then execute:
@@ -21,8 +19,6 @@ Or install it yourself as:
     $ gem install qiniu_utility
 
 ## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
