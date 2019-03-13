@@ -1,5 +1,6 @@
 require "qiniu"
 require "active_support/all"
+require "faraday"
 require "qiniu_utility/version"
 require "qiniu_utility/object_storage"
 
