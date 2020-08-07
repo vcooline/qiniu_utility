@@ -29,5 +29,18 @@ module QiniuUtility
       QiniuUtility.logger.info "QiniuUtility::ObjectStorage fetch_from_url resp(#{resp.status}): #{resp.body}"
       JSON.load(resp.body)["key"]
     end
+
+    def list(bucket, limit=100)
+     code, result, response_headers, s, d = Qiniu::Storage.list(Qiniu::Storage::ListPolicy.new(bucket, limit))
+     QiniuUtility.logger.info "QiniuUtility::ObjectStorage list #{bucket} resp(#{code}): #{result['error'] || {items_count: result["items"].count}.to_json}; #{response_headers.to_json}; #{s.to_json}; #{d.to_json}"
+     result["items"]
+    end
+
+    def delete(bucket, key)
+      code, result, response_headers = Qiniu::Storage.delete(bucket, key)
+      QiniuUtility.logger.info "QiniuUtility::ObjectStorage delete #{bucket} #{key} resp(#{code}): #{result.to_json}; #{response_headers.to_json}"
+      result
+    end
+
   end
 end
