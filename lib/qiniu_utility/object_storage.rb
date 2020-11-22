@@ -44,5 +44,9 @@ module QiniuUtility
       result
     end
 
+    def authenticate_callback_request(auth_str, url, body)
+      Qiniu::Auth.authenticate_callback_request(auth_str, url, body)
+    end
+
   end
 end
