@@ -38,6 +38,14 @@ module QiniuUtility
      result["items"]
     end
 
+    def change_file_type(bucket, key, type, base_url: "http://rs.qiniu.com")
+      QiniuUtility.logger.info "#{self.class.name} change_type reqt: #{bucket}:#{key} to #{type}"
+      encoded_entry_uri = Base64.urlsafe_encode64("#{bucket}:#{key}")
+      api_url = "#{base_url}/chtype/#{encoded_entry_uri}/type/#{type}"
+      resp = Faraday.post api_url, {}, { Authorization: "QBox #{generate_access_token(api_url)}" }
+      QiniuUtility.logger.info "#{self.class.name} change_type resp(#{resp.status}): #{resp.body.squish}"
+    end
+
     def delete(bucket, key)
       code, result, response_headers = Qiniu::Storage.delete(bucket, key)
       QiniuUtility.logger.info "QiniuUtility::ObjectStorage delete #{bucket} #{key} resp(#{code}): #{result.to_json}; #{response_headers.to_json}"
