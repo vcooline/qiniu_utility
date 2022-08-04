@@ -1,10 +1,10 @@
 module QiniuUtility
   class ObjectStorage
-    def initialize(access_key, secret_key)
-      Qiniu.establish_connection!(access_key: access_key, secret_key: secret_key)
+    def initialize(access_key, secret_key, multi_region: false)
+      Qiniu.establish_connection!(access_key:, secret_key:, multi_region:)
     end
 
-    def generate_upload_token(bucket, options={})
+    def generate_upload_token(bucket, options = {})
       put_policy = Qiniu::Auth::PutPolicy.new(bucket)
       options.each { |k, v| put_policy.send("#{k}=", v) if put_policy.respond_to?(k) }
       Qiniu::Auth.generate_uptoken put_policy
